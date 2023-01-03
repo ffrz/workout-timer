@@ -1,0 +1,4 @@
+<h2>Workout Sessions</h2>
+<ul>
+  <li *ngFor="let session of sessions"><a routerLink="/workout-session-detail/{{session.id}}">{{session.name}}</a></li>
+</ul>

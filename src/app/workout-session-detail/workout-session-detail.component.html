@@ -1,0 +1,8 @@
+<h2>{{session?.name}}</h2>
+<ul>
+  <li *ngFor="let movement of session?.movements">
+    <div class="movement-name">{{movement.name}}</div>
+    <div class="movement-duration">{{movement.duration}} seconds</div>
+  </li>
+</ul>
+<button routerLink="/workout-timer/{{session?.id}}">Start Workout Session</button>

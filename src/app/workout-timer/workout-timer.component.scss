@@ -1,0 +1,36 @@
+.app-title {
+  text-align: center;
+  background-color: #ddd;
+  margin: 0;
+  padding: 10px;
+}
+
+.movement-name {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.countdown-timer {
+  text-align: center;
+  font-size: 150px;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.controls {
+  text-align: center;
+  button {
+    margin: 5px;
+    padding: 5px 20PX;
+    font-weight: bold;
+    font-size: 20px;
+    height: 60px;
+  }
+}
+
+#workout-timer-wrapper * {
+  user-select: none;
+}
