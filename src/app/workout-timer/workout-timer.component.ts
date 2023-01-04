@@ -1,6 +1,9 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { WorkoutSession } from '../workout-session';
 import { Movement } from '../movement';
-import { MOVEMENTS } from '../mock-movements';
+import { WORKOUT_SESSIONS } from '../mock-workout-sessions';
 
 @Component({
   selector: 'app-workout-timer',
@@ -10,16 +13,26 @@ import { MOVEMENTS } from '../mock-movements';
 export class WorkoutTimerComponent {
   currentMovementIndex: number = -1;
   currentMovement?: Movement;
-  currentMovements: Movement[] = [];
 
   isPaused: boolean = false;
 
   currentCountDownValue: number = 0;
   currentMovementName: string = '';
   workoutInterval?: any;
+  session?: WorkoutSession;
+
+  constructor(
+    private location: Location,
+    private route: ActivatedRoute) {
+  }
+
+  getSession(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.session = WORKOUT_SESSIONS.find(i => i.id === id);
+  }
 
   ngOnInit() {
-    this.currentMovements = MOVEMENTS;
+    this.getSession();
     this.resetState();
   }
 
@@ -32,9 +45,9 @@ export class WorkoutTimerComponent {
   }
 
   updateCurrentMovement() {
-    this.currentMovement = this.currentMovements[this.currentMovementIndex];
-    this.currentCountDownValue = this.currentMovement.duration;
-    this.currentMovementName = this.currentMovement.name;
+    this.currentMovement = this.session?.movements[this.currentMovementIndex];
+    this.currentCountDownValue = this.currentMovement!.duration;
+    this.currentMovementName = this.currentMovement!.name;
   }
 
   previousMovement() {
@@ -47,7 +60,7 @@ export class WorkoutTimerComponent {
   }
 
   nextMovement() {
-    if (this.currentMovementIndex == this.currentMovements.length) {
+    if (this.currentMovementIndex == this.session?.movements.length) {
       return;
     }
 
@@ -60,7 +73,7 @@ export class WorkoutTimerComponent {
   }
 
   start() {
-    if (this.currentMovements.length == 0) {
+    if (this.session?.movements.length == 0) {
       return;
     }
 
@@ -72,7 +85,7 @@ export class WorkoutTimerComponent {
       }
 
       if (this.currentCountDownValue == 0) {
-        if (this.currentMovementIndex == this.currentMovements.length) {
+        if (this.currentMovementIndex == this.session?.movements.length) {
           // we have reached the end of the movement
           this.stop();
           this.currentMovementName = 'COMPLETED';

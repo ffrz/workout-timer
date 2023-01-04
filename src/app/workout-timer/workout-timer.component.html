@@ -1,26 +1,31 @@
 <div id="workout-timer-wrapper">
-<p class="movement-name">{{currentMovementName}}</p>
-<p class="countdown-timer">{{currentCountDownValue}}</p>
-<div class="controls">
-  <button type="button" (click)="previousMovement()" [disabled]="!isPlaying()"><</button>
-  <button type="button" (click)="isPlaying() ? pause() : start()" style="width: 200px;">
-    <span *ngIf="!isPlaying(); then thenTemplateName else elseTemplateName"></span>
-    <ng-template #thenTemplateName>
-      START
-    </ng-template>
-    <ng-template #elseTemplateName>
-      <span *ngIf="!isPaused; then thenTemplateName else elseTemplateName"></span>
-      <ng-template #thenTemplateName>
-        PAUSE
-      </ng-template>
-      <ng-template #elseTemplateName>
-        RESUME
-      </ng-template>
-    </ng-template>
-  </button>
-  <button type="button" (click)="nextMovement()" [disabled]="!isPlaying()">></button>
-</div>
-<div class="controls">
-  <button type="button" (click)="stop()" [disabled]="!isPlaying()">STOP</button>
-</div>
+  <div style="text-align:center;margin:5px;">{{session!.name}}</div>
+  <div class="movement-name">
+    <h3>{{currentMovementName}}</h3>
+  </div>
+  <p class="countdown-timer">{{currentCountDownValue}}</p>
+  <div class="controls">
+    <button type="button" (click)="previousMovement()" [disabled]="!isPlaying()">
+      <</button>
+        <button type="button" (click)="isPlaying() ? pause() : start()" style="width: 200px;">
+          <span *ngIf="!isPlaying(); then thenTemplateName else elseTemplateName"></span>
+          <ng-template #thenTemplateName>
+            START
+          </ng-template>
+          <ng-template #elseTemplateName>
+            <span *ngIf="!isPaused; then thenTemplateName else elseTemplateName"></span>
+            <ng-template #thenTemplateName>
+              PAUSE
+            </ng-template>
+            <ng-template #elseTemplateName>
+              RESUME
+            </ng-template>
+          </ng-template>
+        </button>
+        <button type="button" (click)="nextMovement()" [disabled]="!isPlaying()">></button>
+  </div>
+  <div class="controls">
+    <button type="button" (click)="stop()" [disabled]="!isPlaying()">STOP</button>
+    <button type="button" routerLink="/workout-session-detail/{{session!.id}}">BACK</button>
+  </div>
 </div>
