@@ -8,7 +8,7 @@ import { WorkoutTimerComponent } from './workout-timer/workout-timer.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'workout-timer/:id', component: WorkoutTimerComponent },
-  { path: 'workout-session', component: WorkoutSessionsComponent },
+  { path: 'workout-sessions', component: WorkoutSessionsComponent },
   { path: 'workout-session-detail/:id', component: WorkoutSessionDetailComponent },
   
 ];
